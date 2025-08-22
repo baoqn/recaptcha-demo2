@@ -6,18 +6,21 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
       function onSuccess(token) {
+         alert("✅ reCAPTCHA success!\nToken: " + token);
         if (window.AndroidInterface) {
           window.AndroidInterface.onRecaptchaSuccess(token);
         }
       }
 
       function onError() {
+        alert("❌ reCAPTCHA error!");
         if (window.AndroidInterface) {
           window.AndroidInterface.onRecaptchaError("Recaptcha error");
         }
       }
 
       function onExpired() {
+         alert("⌛ reCAPTCHA expired!");
         if (window.AndroidInterface) {
           window.AndroidInterface.onRecaptchaError("Recaptcha expired");
         }
