@@ -4,12 +4,34 @@
     <title>reCAPTCHA demo</title>
     <meta charset="UTF-8">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+      function onSuccess(token) {
+        if (window.AndroidInterface) {
+          window.AndroidInterface.onRecaptchaSuccess(token);
+        }
+      }
+
+      function onError() {
+        if (window.AndroidInterface) {
+          window.AndroidInterface.onRecaptchaError("Recaptcha error");
+        }
+      }
+
+      function onExpired() {
+        if (window.AndroidInterface) {
+          window.AndroidInterface.onRecaptchaError("Recaptcha expired");
+        }
+      }
+    </script>
   </head>
   <body>
     <h2>Google reCAPTCHA Demo</h2>
     <form action="?" method="POST">
-      <!-- ⚠️ Thay YOUR_SITE_KEY_HERE bằng site key thật của bạn -->
-      <div class="g-recaptcha" data-sitekey="6LedY64rAAAAAKm70g9wTuJudaPxf7Od0SIVQz8m"></div>
+      <div class="g-recaptcha"
+           data-sitekey="6LedY64rAAAAAKm70g9wTuJudaPxf7Od0SIVQz8m"
+           data-callback="onSuccess"
+           data-error-callback="onError"
+           data-expired-callback="onExpired"></div>
       <br/>
       <input type="submit" value="Submit">
     </form>
